@@ -43,11 +43,11 @@ def get_filters():
     """
     print('Hello! Let\'s explore some US bikeshare data!')
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-    city = check_input("Would you like to see the data for chicago, new york city or washington?",1)
+    city = check_input("Would you like to see the data for chicago, new york city or washington?",1).lower()
     # get user input for month (all, january, february, ... , june)
-    month = check_input("Which Month (all, january, ... june)?", 2)
+    month = check_input("Which Month (all, january, ... june)?", 2).lower()
     # get user input for day of week (all, monday, tuesday, ... sunday)
-    day = check_input("Which day? (all, monday, tuesday, ... sunday)", 3)
+    day = check_input("Which day? (all, monday, tuesday, ... sunday)", 3).lower()
     print('-'*40)
     return city, month, day
 
@@ -184,6 +184,21 @@ def user_stats(df,city):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
+	"""Asking 5 lines of the raw data and more, if they want"""
+def data(df):
+    raw_data = 0
+    while True:
+        answer = input("Do you want to see the raw data? Yes or No").lower()
+        if answer not in ['yes', 'no']:
+            answer = input("You wrote the wrong word. Please type Yes or No.").lower()
+        elif answer == 'yes':
+            raw_data += 5
+            print(df.iloc[raw_data : raw_data + 5])
+            again = input("Do you want to see more? Yes or No").lower()
+            if again == 'no':
+                break
+        elif answer == 'no':
+            return
 
 def main():
     while True:
